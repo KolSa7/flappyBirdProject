@@ -5,20 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:flappyBirdProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800"
+        Title="MainWindow" Height="550" Width="800"
         Focusable="True" Loaded="Window_Loaded"
         PreviewKeyDown="OnKeyDownHandler">
     <Grid Background="#FF00EAFB">
-        <Canvas x:Name="game">
+        <Canvas x:Name="game" Width="800" >
 
-            <Button x:Name="player" Canvas.Left="50" Canvas.Top="250">bird</Button>
-            <StackPanel Canvas.Left="750" x:Name="obstacle">
-                <Rectangle Height="100" Width="50" Fill="#FF00FF27"/>
-                <Rectangle Height="100" Width="50" Fill="#FF00FF27"/>
-                <Rectangle Height="100" Width="50" x:Name="gap"/>
-                <Rectangle Height="100" Width="50" Fill="#FF00FF27"/>
-                <Rectangle Height="100" Width="50" Fill="#FF00FF27"/>
-            </StackPanel>
+            <Button x:Name="player" Canvas.Left="50" Canvas.Top="250" Width="50" Height="25">bird</Button>
         </Canvas>
     </Grid>
 </Window>
