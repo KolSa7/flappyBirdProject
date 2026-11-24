@@ -5,13 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:flappyBirdProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="800"
+        Title="MainWindow" Height="500" Width="800"
         Focusable="True" Loaded="Window_Loaded"
         PreviewKeyDown="OnKeyDownHandler">
     <Grid Background="#FF00EAFB">
-        <Canvas x:Name="game" Width="800" >
-
+        <Canvas x:Name="game" Width="800">
             <Button x:Name="player" Canvas.Left="50" Canvas.Top="250" Width="50" Height="25">bird</Button>
+            <Rectangle Height="400" Canvas.Left="800" Canvas.Top="-200" Stroke="Black" Width="50" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Rectangle Height="400" Canvas.Left="800" Canvas.Top="300"   Stroke="Black" Width="50" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Rectangle Height="400" Canvas.Left="650" Canvas.Top="-200" Stroke="Black" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Rectangle Height="400" Canvas.Left="650" Canvas.Top="300" Stroke="Black" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Rectangle Height="400" Canvas.Left="500" Canvas.Top="-200" Stroke="Black" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Rectangle Height="400" Canvas.Left="500" Canvas.Top="300" Stroke="Black" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Rectangle Height="400" Canvas.Left="350" Canvas.Top="-200" Stroke="Black" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Rectangle Height="400" Canvas.Left="350" Canvas.Top="300" Stroke="Black" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Rectangle Height="400" Canvas.Left="200" Canvas.Top="-200" Stroke="Black" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Rectangle Height="400" Canvas.Left="200" Canvas.Top="300" Stroke="Black" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Canvas>
     </Grid>
 </Window>
