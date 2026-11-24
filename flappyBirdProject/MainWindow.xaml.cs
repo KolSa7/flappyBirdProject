@@ -1,15 +1,7 @@
-﻿using System.Diagnostics.Metrics;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Timers;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -27,11 +19,12 @@ namespace flappyBirdProject
 
         DispatcherTimer timer;
         Random rnd = new Random();
-        int difficulty = -12;
+        int difficulty = -10;
         double speed = 1;
         int gap = 50;
         int tickCount = 0;
         List<StackPanel> obstacles;
+        int score = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -40,6 +33,7 @@ namespace flappyBirdProject
             timer.Interval = TimeSpan.FromMilliseconds(20);
             timer.Tick += timer_Tick;
             timer.Start();
+            gap = difficulty * (-5);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -79,41 +73,48 @@ namespace flappyBirdProject
             
             tickCount++;
         }
-        private void CheckCollisions() 
+        /*private void CheckCollisions() 
         { 
             double playerY=Canvas.GetTop(player);
             double playerX=Canvas.GetLeft(player);
             foreach (var obstacle in obstacles)
-            {
+          
                 double gapX = Canvas.GetLeft(obstacle);
-                double gapY=-1;
+                double[] gapY=[0, 0];//gap teteje, alja
                 foreach (Rectangle block in obstacle.Children)
                 {
-                    gapY = block.Tag == "gap" ? Canvas.GetTop(block) : -1;//gapY-100 a range alja
+                    gapY = [];
                 }
-                //if ()//ha x ertekben benne van a csoben
+                //if ()
                 {
                     
 
 
                 }
             }
-        }
+        }*/
         private void MoveObstackles() 
         {
             foreach (StackPanel obj in obstacles)
-            { 
-                    double objPos = Canvas.GetLeft(obj);
-                    Canvas.SetLeft(obj, objPos + difficulty / 2);
-                    if (objPos < -50)
-                    {
-                        game.Children.Remove(obj);
-                    }
+            {
+                double objPos = Canvas.GetLeft(obj);
+                Canvas.SetLeft(obj, objPos + difficulty / 2);
+                if ( objPos < -50)
+                {
+                    game.Children.Remove(obj);
+
+                }
+                if (objPos == 50)
+                {
+                    score++;
+                    MessageBox.Show(score.ToString());
+                }
+
             }
         }
         private void GenerateObstackle()
         {
-            int gapLocation = rnd.Next(1, 4);
+            int gapLocation = rnd.Next(100,400);
             StackPanel obstacle = new StackPanel
             {
                 Width = 50,
@@ -121,18 +122,27 @@ namespace flappyBirdProject
             };
 
             Canvas.SetLeft(obstacle, 800);
-
-            for (int i = 0; i < 5; i++)
+            obstacle.Children.Add(new Rectangle
             {
-                obstacle.Children.Add(new Rectangle
-                {
-                    Height = 100,
-                    Width = 50,
-                    Fill = i == gapLocation ? Brushes.Transparent : new SolidColorBrush(Color.FromRgb(0, 255, 39)),
-                    Tag = i == gapLocation ? "gap" : "obstacle "
-                });
-            }
-
+                Height = 500-gapLocation,
+                Width = 50,
+                Fill = new SolidColorBrush(Color.FromRgb(0, 255, 39)),
+                Tag = "obstacle"
+            });
+            obstacle.Children.Add(new Rectangle
+            {
+                Height = -1000/difficulty,
+                Width = 50,
+                Fill = Brushes.Transparent,
+                Tag = "gap"
+            });
+            obstacle.Children.Add(new Rectangle
+            {
+                Height = gapLocation,
+                Width = 50,
+                Fill = new SolidColorBrush(Color.FromRgb(0, 255, 39)),
+                Tag = "obstacle"
+            });
             game.Children.Add(obstacle);
             obstacles.Add(obstacle);
         }
